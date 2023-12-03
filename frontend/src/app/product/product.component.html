@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="btn-group my-3">
+        <button type="button" class="btn btn-success" (click)="openCreateModal()">{{ operationEnum.CREATE }}</button>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">名稱</th>
+                <th scope="col">售價</th>
+                <th scope="col">折扣</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (product of products; track product.id; let i = $index) {
+            <tr>
+                <td>{{ product.name }}
+                </td>
+                <td>{{ product.price | number }}</td>
+                <td>{{ product.hasDiscount ? ('買' + product.discountBuy + '送' + product.discountFree) : '無折扣' }}</td>
+                <td>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-warning" (click)="openUpdateModal(product)">{{ operationEnum.UPDATE }}</button>
+                        <button type="button" class="btn btn-danger" (click)="openDeleteModal(product)">{{ operationEnum.DELETE }}</button>
+                    </div>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

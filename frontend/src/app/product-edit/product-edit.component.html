@@ -1,0 +1,37 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-title">{{ '商品' + operation }}</h4>
+    <button type="button" class="btn-close" (click)="activeModal.dismiss('Cross click')"></button>
+</div>
+<div class="modal-body">
+    <div *ngIf="operation == operationEnum.DELETE; else productform">
+        <p>確定要下架商品<strong class="text-danger">{{ editProduct.name }}</strong>嗎？</p>
+    </div>
+    <ng-template #productform>
+        <div class="input-group mb-3">
+            <span class="input-group-text">名稱</span>
+            <input type="text" class="form-control" [(ngModel)]="editProduct.name">
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text">售價</span>
+            <input type="number" class="form-control" [(ngModel)]="editProduct.price">
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text">折扣</span>
+            <span class="input-group-text">買</span>
+            <input type="number" class="form-control" [(ngModel)]="editProduct.discountBuy">
+            <span class="input-group-text">送</span>
+            <input type="number" class="form-control" [(ngModel)]="editProduct.discountFree">
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text">生效日</span>
+            <ngb-datepicker #dp [(ngModel)]="validFromNgb"/>
+        </div>
+    </ng-template>
+    <div class="alert alert-danger" [hidden]="hideErrorMsg">
+        {{ errorMsg }}
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="activeModal.dismiss('cancel click')">取消</button>
+    <button type="button" class="btn btn-danger" (click)="validate()">{{ operation }}</button>
+</div>
